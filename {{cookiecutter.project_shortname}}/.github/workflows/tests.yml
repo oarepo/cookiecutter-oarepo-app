@@ -58,33 +58,36 @@ jobs:
             SEARCH_EXTRAS: "elasticsearch7"
 
     env:
-      DB: ${{ matrix.db-service }}
-      SEARCH: ${{ matrix.search-service }}
-      EXTRAS: all,${{ matrix.DB_EXTRAS }},${{ matrix.SEARCH_EXTRAS }}
+      DB: ${{{{ matrix.db-service }}}}
+      SEARCH: ${{{{ matrix.search-service }}}}
+      EXTRAS: all,${{{{ matrix.DB_EXTRAS }}}},${{{{ matrix.SEARCH_EXTRAS }}}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{{{ matrix.python-version }}}}
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{{{ matrix.python-version }}}}
 
       - name: Generate dependencies
         run: |
           pip install "setuptools<=58" wheel requirements-builder
-          requirements-builder -e "$EXTRAS" --level=${{ matrix.requirements-level }} setup.py > .${{ matrix.requirements-level }}-${{ matrix.python-version }}-requirements.txt
-          cat .${{ matrix.requirements-level }}-${{ matrix.python-version }}-requirements.txt
+          requirements-builder -e "$EXTRAS" --level=${{{{ matrix.requirements-level }}}} setup.py > .${{{{ matrix.requirements-level }}}}-${{{{ matrix.python-version }}}}-requirements.txt
+          cat .${{{{ matrix.requirements-level }}}}-${{{{ matrix.python-version }}}}-requirements.txt
 
       - name: Cache pip
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
+          {%- raw %}
           key: ${{ runner.os }}-pip-${{ hashFiles('.${{ matrix.requirements-level }}-${{ matrix.python-version }}-requirements.txt') }}
-
+          {%- endraw %}
       - name: Install dependencies
         run: |
+          {%- raw %}
           pip install -r .${{ matrix.requirements-level }}-${{ matrix.python-version }}-requirements.txt
+          {%- endraw %}
           pip install ".[$EXTRAS]"
           pip freeze
           docker --version

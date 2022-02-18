@@ -44,7 +44,7 @@ recursive-include {{cookiecutter.package_name}} *.gitkeep
 recursive-include {{cookiecutter.package_name}} *.html *.js *.less *.json
 recursive-include {{cookiecutter.package_name}} *.overrides
 recursive-include {{cookiecutter.package_name}} *.variables
-recursive-include inve{{cookiecutter.package_name}} *.png *.svg
+recursive-include {{cookiecutter.package_name}} *.png *.svg
 recursive-include {{cookiecutter.package_name}} *.po *.pot *.mo
 recursive-include docker *.cfg *.conf *.crt *.ini *.key *.pem *.sh
 recursive-include tests *.py
