@@ -1,0 +1,18 @@
+{
+  "project_name": "OARepo app custom",
+  "project_shortname": "{{ cookiecutter.project_name | slugify() }}",
+  "package_name": "{{ cookiecutter.project_shortname | replace('-', '_') }}",
+  "project_site": "{{ cookiecutter.project_shortname }}.com",
+  "github_repo": "{{ cookiecutter.project_shortname }}/{{ cookiecutter.project_shortname }}",
+  "description": "{{ cookiecutter.project_name }} application module",
+  "author_name": "CESNET",
+  "author_email": "info@{{ cookiecutter.project_site }}",
+  "notification_sender_email": "info@oarepo.org",
+  "year": "{% now 'local', '%Y' %}",
+  "python_version": ["3.9", "3.8"],
+  "database": ["postgresql"],
+  "elasticsearch": ["7"],
+  "file_storage": ["local", "S3"],
+  "development_tools": ["yes", "no"],
+  "record_models": { "packages": [] }
+}
