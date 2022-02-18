@@ -35,7 +35,7 @@ import {
 } from "react-invenio-deposit";
 import { AccordionField } from "react-invenio-forms";
 import { Card, Container, Divider, Grid, Ref, Sticky } from "semantic-ui-react";
-import { i18next } from "@translations/invenio_app_rdm/i18next";
+import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
 
 export class RDMDepositForm extends Component {
   constructor(props) {
@@ -246,7 +246,7 @@ export class RDMDepositForm extends Component {
                       searchApi: {
                         axios: {
                           headers: {
-                            Accept: "application/vnd.inveniordm.v1+json",
+                            Accept: "application/vnd.oarepo.v1+json",
                           },
                           url: "/api/vocabularies/licenses",
                           withCredentials: false,

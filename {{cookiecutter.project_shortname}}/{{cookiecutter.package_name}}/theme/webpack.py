@@ -46,7 +46,7 @@ theme = WebpackThemeBundle(
                 # Define Semantic-UI theme configuration needed by
                 # Invenio-Theme in order to build Semantic UI (in theme.js
                 # entry point). theme.config itself is provided by
-                # cookiecutter-invenio-rdm.
+                # cookiecutter-oarepo-app.
                 '../../theme.config$': 'less/theme.config',
                 'themes/oarepo': 'less/{{cookiecutter.package_name}}/theme',
                 '@less/{{cookiecutter.package_name}}': 'less/{{cookiecutter.package_name}}',

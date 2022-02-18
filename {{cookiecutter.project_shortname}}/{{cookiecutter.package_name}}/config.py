@@ -451,7 +451,7 @@ SEARCH_ELASTIC_HOSTS = [{"host": "localhost", "port": 9200}]
 # ===============
 # See https://invenio-indexer.readthedocs.io/en/latest/configuration.html
 
-INDEXER_DEFAULT_INDEX = "{{cookiecutter.record_models.packages[0]}}-record-v1.0.0"
+INDEXER_DEFAULT_INDEX = "{{cookiecutter.record_model}}-record-v1.0.0"
 """Default index to use if no schema is defined."""
 
 # Invenio-Base

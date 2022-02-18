@@ -256,7 +256,7 @@ def search_app_config(
     """Search app config."""
     opts = dict(
         endpoint=endpoint,
-        headers={"Accept": "application/vnd.inveniordm.v1+json"},
+        headers={"Accept": "application/vnd.oarepo.v1+json"},
         grid_view=False,
         sort=sort_config(config_name),
         facets=facets_config(config_name, available_facets),

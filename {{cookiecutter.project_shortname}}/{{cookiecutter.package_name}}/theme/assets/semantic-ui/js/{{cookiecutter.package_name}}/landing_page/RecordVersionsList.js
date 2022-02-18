@@ -97,7 +97,7 @@ export const RecordVersionsList = (props) => {
         `${record.links.versions}?size=${NUMBER_OF_VERSIONS}&sort=version&allversions=true`,
         {
           headers: {
-            Accept: "application/vnd.inveniordm.v1+json",
+            Accept: "application/vnd.oarepo.v1+json",
           },
           withCredentials: true,
         }
