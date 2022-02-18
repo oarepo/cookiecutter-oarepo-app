@@ -6,6 +6,7 @@
 #}
 
 
+{%- raw %}
 {% macro show_detail(title, value) %}
   <dt class="ui tiny header">{{ title }}</dt>
   <dd>{{ value }}</dd>
@@ -145,3 +146,4 @@
     {{ lang.title_l10n }}{{ ", " if not loop.last }}
   {% endfor %}
 {% endmacro %}
+{%- endraw %}

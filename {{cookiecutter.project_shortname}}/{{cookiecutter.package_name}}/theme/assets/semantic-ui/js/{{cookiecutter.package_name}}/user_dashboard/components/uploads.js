@@ -6,8 +6,8 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+{%- raw %}
+import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
 import _get from "lodash/get";
 import _truncate from "lodash/truncate";
 import React, { useState } from "react";
@@ -296,3 +296,4 @@ export const defaultComponents = {
   "user-uploads-search.SearchBar.element": RDMRecordSearchBarElement,
   "user-uploads-search.SearchFilters.ToggleComponent": RDMToggleComponent,
 };
+{%- endraw %}

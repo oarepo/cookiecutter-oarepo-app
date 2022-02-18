@@ -7,7 +7,7 @@
     Invenio App RDM is free software; you can redistribute it and/or modify it
     under the terms of the MIT License; see LICENSE file for more details.
 #}
-
+{%- raw %}
 <div>
   <header class="theme header">
     <div class="outer-navbar">
@@ -20,7 +20,7 @@
                   {%- block brand %}
                     {%- if config.THEME_LOGO %}
                       <a class="logo-link" href="/">
-                        <img class="ui medium image" src="{{ url_for('static', filename=config.THEME_LOGO) }}" alt="{{ _(config.THEME_SITENAME) }}"/>
+       - raw                  <img class="ui medium image" src="{{ url_for('static', filename=config.THEME_LOGO) }}" alt="{{ _(config.THEME_SITENAME) }}"/>
                       </a>
                     {%- else %}
                       <a class="logo" href="/">{{ _(config.THEME_SITENAME) }}</a>
@@ -109,3 +109,4 @@
     {%- include "invenio_theme/breadcrumbs.html" %}
   {%- endblock breadcrumbs %}
 </div>
+{%- endraw %}

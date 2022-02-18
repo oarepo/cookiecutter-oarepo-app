@@ -2,6 +2,7 @@
 Copyright (C) 2021 TU Wien. Copyright (C) 2022 New York University. Invenio RDM
 Records is free software; you can redistribute it and/or modify it under the
 terms of the MIT License; see LICENSE file for more details. #}
+{%- raw %}
 {%- if config.get("APP_RECORD_EXPORTERS") -%}
   {# if no export formats are
 specified, don't bother showing the box #}
@@ -22,9 +23,9 @@ specified, don't bother showing the box #}
           {%- for fmt, val in config.get("APP_RECORD_EXPORTERS", {}).items() -%}
             {%- set name = val.get("name", fmt) -%}
             {% if is_preview %}
-              {%- set export_url = url_for('{{cookiecutter.package_name}}_records.record_export', pid_value=record.id, export_format=fmt, preview=1) -%}
+              {%- set export_url = url_for('{%- endraw %}{{cookiecutter.package_name}}{%- raw %}_records.record_export', pid_value=record.id, export_format=fmt, preview=1) -%}
             {% else %}
-              {%- set export_url = url_for('{{cookiecutter.package_name}}_records.record_export', pid_value=record.id, export_format=fmt) -%}
+              {%- set export_url = url_for('{%- endraw %}{{cookiecutter.package_name}}{%- raw %}_records.record_export', pid_value=record.id, export_format=fmt) -%}
             {% endif %}
             {% if loop.first %}
               {%- set ns.initial_val = export_url %}
@@ -39,3 +40,4 @@ specified, don't bother showing the box #}
     </div>
   </section>
 {%- endif -%}
+{%- endraw %}

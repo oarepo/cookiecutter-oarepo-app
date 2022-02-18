@@ -1,3 +1,4 @@
+{%- raw %}
 {
     "Basic information": "Allgemeine Informationen",
     "Anyone with this link <1>can view all versions</1> of this record & files.": "Jeder, der diesen Link hat, <1>kann alle Versionen</1> dieses Eintrags und der Dateien einsehen.",
@@ -78,3 +79,4 @@
     "Uploads": "Einträge",
     "Communities": "Communities"
 }
+{%- endraw %}

@@ -6,12 +6,12 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-
+{%- raw %}
 import {
   SearchAppFacets,
   SearchAppResultsPane,
 } from "@js/invenio_search_ui/components";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
 import _get from "lodash/get";
 import _truncate from "lodash/truncate";
 import React, { Component } from "react";
@@ -138,3 +138,4 @@ export const DashboardSearchLayoutHOC = ({
   );
   return DashboardUploadsSearchLayout;
 };
+{%- endraw %}

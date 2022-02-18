@@ -6,6 +6,7 @@
 
 // list of func used to
 // mark the strings for translation
+{%- raw %}
 const { languages } = require("./package.json").config;
 const funcList = ["i18next.t"];
 const extensions = ['.js', '.jsx'];
@@ -61,3 +62,4 @@ module.exports = {
     keySeparator: false,
   },
 };
+{%- endraw %}

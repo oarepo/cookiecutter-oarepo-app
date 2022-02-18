@@ -8,6 +8,7 @@
   it under the terms of the MIT License; see LICENSE file for more details.
 #}
 
+{%- raw %}
 {% macro license_link(license) %}
   {% if license.link %}
     <a class="license-link" href="{{ license.link }}" target="_blank" title="{{ _('Opens in new tab') }}">Read more</a>
@@ -59,3 +60,4 @@
     </ul>
   </section>
 {% endif %}
+{%- endraw %}

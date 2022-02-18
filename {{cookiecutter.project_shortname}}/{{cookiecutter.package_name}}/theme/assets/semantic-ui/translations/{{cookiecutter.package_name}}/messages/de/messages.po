@@ -8,6 +8,7 @@
 # chriz_uniba <christina.zeller@uni-bamberg.de>, 2022
 # David Eckhard <dabombeeer@gmail.com>, 2022
 # 
+{%- raw %}
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
@@ -267,3 +268,4 @@ msgstr "Einträge"
 
 msgid "Communities"
 msgstr "Communities"
+{%- endraw %}

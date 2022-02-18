@@ -6,7 +6,7 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-
+{%- raw %}
 import React, { useState } from "react";
 import {
   Button,
@@ -28,7 +28,7 @@ import _get from "lodash/get";
 import _truncate from "lodash/truncate";
 import Overridable from "react-overridable";
 import { SearchBar } from "@js/invenio_search_ui/components";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
 import { SearchItemCreators } from "../utils";
 
 export const RDMRecordResultsListItem = ({ result, index }) => {
@@ -349,3 +349,4 @@ export const RDMErrorComponent = ({ error }) => {
     </Message>
   );
 };
+{%- endraw %}

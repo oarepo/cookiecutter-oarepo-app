@@ -5,7 +5,7 @@
 //
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-
+{%- raw %}
 import _get from "lodash/get";
 import React, { Component, createRef, Fragment } from "react";
 import {
@@ -35,7 +35,7 @@ import {
 } from "react-invenio-deposit";
 import { AccordionField } from "react-invenio-forms";
 import { Card, Container, Divider, Grid, Ref, Sticky } from "semantic-ui-react";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
 
 export class RDMDepositForm extends Component {
   constructor(props) {
@@ -397,3 +397,4 @@ export class RDMDepositForm extends Component {
     );
   }
 }
+{%- endraw %}

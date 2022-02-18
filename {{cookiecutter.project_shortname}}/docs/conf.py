@@ -288,8 +288,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, '{{cookiecutter.project_shortname}', u'{{cookiecutter.project_name}} Documentation',
-     author, '{{cookiecutter.project_shortname}', '{{cookiecutter.project_name}}',
+    (master_doc, '{{cookiecutter.project_shortname}}', u'{{cookiecutter.project_name}} Documentation',
+     author, '{{cookiecutter.project_shortname}}', '{{cookiecutter.project_name}}',
      'Miscellaneous'),
 ]
 

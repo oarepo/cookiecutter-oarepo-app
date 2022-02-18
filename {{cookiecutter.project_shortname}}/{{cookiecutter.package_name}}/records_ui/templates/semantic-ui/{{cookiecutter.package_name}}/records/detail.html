@@ -2,10 +2,16 @@
 University. Copyright (C) 2021 TU Wien. Copyright (C) 2021 Graz University of
 Technology. Copyright (C) 2021 New York University. Invenio RDM Records is free
 software; you can redistribute it and/or modify it under the terms of the MIT
-License; see LICENSE file for more details. #} {%- extends config.BASE_TEMPLATE
-%} {%- from "{{cookiecutter.package_name}}/records/macros/files.html" import
-file_list_box, preview_file_box %} {%- set title = record.metadata.title -%} {%-
-set metadata = record.metadata %} {%- block page_body %}
+License; see LICENSE file for more details. #}
+
+{%- raw %}
+{%- extends config.BASE_TEMPLATE %}
+{%- from "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/macros/files.html" import
+file_list_box, preview_file_box %}
+
+{%- set title = record.metadata.title -%}
+{%- set metadata = record.metadata %}
+{%- block page_body %}
 <section
   id="banners"
   class="banners"
@@ -92,7 +98,7 @@ set metadata = record.metadata %} {%- block page_body %}
         and is_draft %}
         <nav class="back-navigation" aria-label="{{ _('Back-navigation') }}">
           {%- set back_page =
-          url_for('{{cookiecutter.package_name}}_records.deposit_edit',
+          url_for('{%- endraw %}{{cookiecutter.package_name}}{%- raw %}_records.deposit_edit',
           pid_value=record.id, preview=1) -%} {%- set back_btn_label = _('Back
           to edit') -%}
           <a class="ui button small compact" href="{{ back_page }}"
@@ -153,7 +159,7 @@ set metadata = record.metadata %} {%- block page_body %}
             aria-label="{{ _('Creators and contributors') }}"
           >
             {%- include
-            "{{cookiecutter.package_name}}/records/details/creatibutors.html" %}
+            "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/details/creatibutors.html" %}
           </section>
           {% endif %}
         </section>
@@ -161,11 +167,11 @@ set metadata = record.metadata %} {%- block page_body %}
         record_content -%}
         <section id="citation" aria-label="{{ _('Record citations') }}">
           {%- include
-          "{{cookiecutter.package_name}}/records/details/citation.html" %}
+          "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/details/citation.html" %}
         </section>
 
         {%- include
-        "{{cookiecutter.package_name}}/records/details/description.html" %} {%-
+        "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/details/description.html" %} {%-
         endblock record_content -%} {# Files #} {%- block record_files -%} {%-
         if record.files.enabled -%}
         <section
@@ -219,7 +225,7 @@ set metadata = record.metadata %} {%- block page_body %}
           aria-label="{{ _('Additional record details') }}"
         >
           {%- include
-          "{{cookiecutter.package_name}}/records/details/details.html" %}
+          "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/details/details.html" %}
         </section>
         {%- endblock record_details -%} {# Record footer #} {%- block
         record_footer -%} {%- endblock record_footer -%} {%- endblock
@@ -232,7 +238,7 @@ set metadata = record.metadata %} {%- block page_body %}
         aria-label="{{ _('Record details') }}"
       >
         {% block record_sidebar %} {%- include
-        "{{cookiecutter.package_name}}/records/details/side_bar.html" %} {%
+        "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/details/side_bar.html" %} {%
         endblock record_sidebar %}
       </aside>
     </div>
@@ -280,7 +286,8 @@ set metadata = record.metadata %} {%- block page_body %}
 </div>
 
 {%- endblock page_body %} {%- block javascript %} {{ super() }} {{
-webpack['{{cookiecutter.project_shortname}}-landing-page.js'] }} {# Communities
+webpack['{%- endraw %}{{cookiecutter.project_shortname}}{%- raw %}-landing-page.js'] }} {# Communities
 management -- TODO include again when communities are ready #} {# {{
 webpack['invenio-communities-records.js'] }} #} {{ webpack['previewer_theme.js']
 }} {%- endblock javascript %}
+{%- endraw %}

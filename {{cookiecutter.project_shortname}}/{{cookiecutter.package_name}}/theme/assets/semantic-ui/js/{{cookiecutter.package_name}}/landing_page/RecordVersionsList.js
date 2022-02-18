@@ -5,12 +5,12 @@
 //
 // Invenio RDM Records is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
-
+{%- raw %}
 import axios from "axios";
 import _get from "lodash/get";
 import React, { useEffect, useState } from "react";
 import { Divider, Grid, Icon, Message, Placeholder } from "semantic-ui-react";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
 
 const deserializeRecord = (record) => ({
   id: record.id,
@@ -143,3 +143,4 @@ export const RecordVersionsList = (props) => {
     </Grid>
   );
 };
+{%- endraw %}

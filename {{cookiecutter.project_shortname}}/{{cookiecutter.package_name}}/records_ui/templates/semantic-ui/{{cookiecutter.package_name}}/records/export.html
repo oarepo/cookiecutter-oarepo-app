@@ -5,14 +5,15 @@
   it under the terms of the MIT License; see LICENSE file for more details.
 #}
 
-{%- extends "{{cookiecutter.package_name}}/records/detail.html" %}
+{%- raw %}
+{%- extends "{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/records/detail.html" %}
 
 {%- block record_header_button -%}
   <div style="margin-bottom: 12px;">
     {% if is_preview %}
-      {%- set back_page = url_for('{{cookiecutter.package_name}}_records.record_detail', pid_value=record.id, preview=1) -%}
+      {%- set back_page = url_for('{%- endraw %}{{cookiecutter.package_name}}{%- raw %}_records.record_detail', pid_value=record.id, preview=1) -%}
     {% else %}
-      {%- set back_page = url_for('{{cookiecutter.package_name}}_records.record_detail', pid_value=record.id) -%}
+      {%- set back_page = url_for('{%- endraw %}{{cookiecutter.package_name}}{%- raw %}_records.record_detail', pid_value=record.id) -%}
     {% endif %}
     {%- set back_btn_label = _('Back to details') -%}
     <a class="ui button small compact" href="{{ back_page }}">
@@ -34,3 +35,4 @@
 {% block record_files %}{% endblock %}
 {% block record_details %}{% endblock %}
 {% block record_footer %}{% endblock %}
+{%- endraw %}

@@ -8,9 +8,11 @@
   it under the terms of the MIT License; see LICENSE file for more details.
 -#}
 
+{%- raw %}
 <section id="record-versions" aria-label="{{ _('Record versions') }}" class="ui segment oarepo-sidebar">
   <h2 class="ui small header">{{ _('Versions')}}</h2>
   <div class="versions">
     <div id="recordVersions" data-record='{{ record | tojson }}' data-preview='{{ is_preview | tojson }}'></div>
   </div>
 </section>
+{%- endraw %}

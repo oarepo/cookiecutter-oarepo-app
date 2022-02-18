@@ -7,6 +7,7 @@
   it under the terms of the MIT License; see LICENSE file for more details.
 #}
 
+{%- raw %}
 {%- set subjects = record.metadata.subjects -%}
 
 {% if subjects %}
@@ -43,3 +44,4 @@
   </dl>
   {%- endfor %}
 {% endif %}
+{%- endraw %}

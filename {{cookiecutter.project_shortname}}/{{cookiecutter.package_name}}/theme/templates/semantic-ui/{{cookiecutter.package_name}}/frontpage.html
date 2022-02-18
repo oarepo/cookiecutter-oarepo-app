@@ -2,9 +2,10 @@
 University. Copyright (C) 2021 New York University. Invenio App RDM is free
 software; you can redistribute it and/or modify it under the terms of the MIT
 License; see LICENSE file for more details. #}
+{%- raw %}
 {%- extends "invenio_theme/frontpage.html" %}
 {%- block page_header %}
-  {%- include "{{cookiecutter.package_name}}/header_frontpage.html" %}
+  {%- include "{%- endraw %}{{cookiecutter.package_name}}{%- raw%}/header_frontpage.html" %}
 {%- endblock page_header %}
 {%- block page_body %}
   {%- block first_section%}
@@ -17,8 +18,7 @@ License; see LICENSE file for more details. #}
           <div class="invenio-oarepo-project-goals">
             <div class="oarepo-goal">
               <div class="flex-center-vertically">
-                <div class="numbering">1</div>
-              </div>
+                <div class="numbering">1</div> </div>
               <h3 class="section-title">{{ _("Configure") }}</h3>
               <div class="command-line">
                 {% trans
@@ -54,7 +54,9 @@ License; see LICENSE file for more details. #}
             %}
                 <a href="{{ deployment_link }}" target="_blank">Run</a>
                 your
+{%- endraw %}
                 {{cookiecutter.project_name}}
+{%- raw %}
                 instance locally or in containers.
                 {% endtrans %}
               </div>
@@ -77,3 +79,4 @@ License; see LICENSE file for more details. #}
     </div>
   {%- endblock first_section%}
 {%- endblock page_body%}
+{%- endraw %}
