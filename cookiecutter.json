@@ -16,6 +16,6 @@
   "development_tools": ["yes", "no"],
   "record_model": "my-oarepo-records",
   "_copy_without_render": [
-       "*.html"
+       "**/*.html"
    ]
 }
