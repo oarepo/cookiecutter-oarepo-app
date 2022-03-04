@@ -11,6 +11,7 @@ import { Trans } from 'react-i18next'
 import { i18next } from '@translations/{{cookiecutter.package_name}}/i18next'
 import { axiosWithconfig } from '../utils'
 
+{%- raw %}
 export const ShareModal = (props) => {
   const [accessLinkObj, setAccessLinkObj] = useState()
   const [linkCreated, setLinkCreated] = useState(false)
@@ -264,3 +265,4 @@ export const ShareModal = (props) => {
     </Modal>
   )
 }
+{%- endraw %}
