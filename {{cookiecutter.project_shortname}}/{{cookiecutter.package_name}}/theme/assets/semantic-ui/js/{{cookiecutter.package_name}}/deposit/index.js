@@ -5,20 +5,19 @@
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import React from "react";
-import ReactDOM from "react-dom";
-import "semantic-ui-css/semantic.min.css";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
-import { getInputFromDOM } from "react-invenio-deposit";
-import { RDMDepositForm } from "./RDMDepositForm";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import 'semantic-ui-css/semantic.min.css'
+import { getInputFromDOM } from 'react-invenio-deposit'
+import { RDMDepositForm } from './RDMDepositForm'
 
 ReactDOM.render(
   <RDMDepositForm
-    record={getInputFromDOM("deposits-record")}
-    community={getInputFromDOM("deposits-draft-community")}
-    files={getInputFromDOM("deposits-record-files")}
-    config={getInputFromDOM("deposits-config")}
-    permissions={getInputFromDOM("deposits-record-permissions")}
+    record={getInputFromDOM('deposits-record')}
+    community={getInputFromDOM('deposits-draft-community')}
+    files={getInputFromDOM('deposits-record-files')}
+    config={getInputFromDOM('deposits-config')}
+    permissions={getInputFromDOM('deposits-record-permissions')}
   />,
-  document.getElementById("deposit-form")
-);
+  document.getElementById('deposit-form'),
+)

@@ -10,11 +10,11 @@
 import {
   SearchAppFacets,
   SearchAppResultsPane,
-} from "@js/invenio_search_ui/components";
-import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
-import _get from "lodash/get";
-import _truncate from "lodash/truncate";
-import React, { Component } from "react";
+} from '@js/invenio_search_ui/components'
+import { i18next } from '@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next'
+import _get from 'lodash/get'
+import _truncate from 'lodash/truncate'
+import React, { Component } from 'react'
 import {
   Count,
   Pagination,
@@ -22,14 +22,14 @@ import {
   ResultsPerPage,
   SearchBar,
   Sort,
-} from "react-searchkit";
-import { Container, Grid, Segment } from "semantic-ui-react";
+} from 'react-searchkit'
+import { Container, Grid, Segment } from 'semantic-ui-react'
 
-import Overridable from "react-overridable";
+import Overridable from 'react-overridable'
 
 export function DashboardResultView(props) {
-  const { sortOptions, paginationOptions, currentResultsState } = props;
-  const { total } = currentResultsState.data;
+  const { sortOptions, paginationOptions, currentResultsState } = props
+  const { total } = currentResultsState.data
   return (
     total && (
       <Grid>
@@ -46,7 +46,7 @@ export function DashboardResultView(props) {
                       <Count
                         label={() => (
                           <>
-                            {total} {i18next.t("result(s) found")}
+                            {total} {i18next.t('result(s) found')}
                           </>
                         )}
                       />
@@ -61,7 +61,7 @@ export function DashboardResultView(props) {
                           values={sortOptions}
                           label={(cmp) => (
                             <>
-                              {i18next.t("Sort by")} {cmp}
+                              {i18next.t('Sort by')} {cmp}
                             </>
                           )}
                         />
@@ -86,7 +86,7 @@ export function DashboardResultView(props) {
             <Grid.Column width={8} textAlign="center" floated="right">
               <Pagination
                 options={{
-                  size: "mini",
+                  size: 'mini',
                   showFirst: false,
                   showLast: false,
                 }}
@@ -97,8 +97,8 @@ export function DashboardResultView(props) {
                 values={paginationOptions.resultsPerPage}
                 label={(cmp) => (
                   <>
-                    {" "}
-                    {cmp} {i18next.t("results per page")}
+                    {' '}
+                    {cmp} {i18next.t('results per page')}
                   </>
                 )}
               />
@@ -107,11 +107,11 @@ export function DashboardResultView(props) {
         </Overridable>
       </Grid>
     )
-  );
+  )
 }
 
 export const DashboardSearchLayoutHOC = ({
-  searchBarPlaceholder = "",
+  searchBarPlaceholder = '',
   newBtn = () => null,
   ...props
 }) => {
@@ -135,7 +135,7 @@ export const DashboardSearchLayoutHOC = ({
         </Grid.Row>
       </Grid>
     </Container>
-  );
-  return DashboardUploadsSearchLayout;
-};
+  )
+  return DashboardUploadsSearchLayout
+}
 {%- endraw %}

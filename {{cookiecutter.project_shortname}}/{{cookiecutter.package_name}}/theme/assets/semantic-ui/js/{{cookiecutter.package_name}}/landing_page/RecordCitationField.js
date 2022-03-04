@@ -6,33 +6,33 @@
 // Invenio RDM Records is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 
-import axios from "axios";
-import _debounce from "lodash/debounce";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Header, Placeholder, Grid, Dropdown } from "semantic-ui-react";
-import { withCancel } from "../utils";
-import { CopyButton } from "../components/CopyButton";
-import { i18next } from "@translations/{{cookiecutter.package_name}}/i18next";
+import axios from 'axios'
+import _debounce from 'lodash/debounce'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Header, Placeholder, Grid, Dropdown } from 'semantic-ui-react'
+import { withCancel } from '../utils'
+import { CopyButton } from '../components/CopyButton'
+import { i18next } from '@translations/{{cookiecutter.package_name}}/i18next'
 
 export class RecordCitationField extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       loading: true,
-      citation: "",
+      citation: '',
       error: null,
-    };
+    }
   }
 
   componentDidMount() {
-    const { record, defaultStyle } = this.props;
-    this.getCitation(record, defaultStyle);
+    const { record, defaultStyle } = this.props
+    this.getCitation(record, defaultStyle)
   }
 
   componentWillUnmount() {
-    this.cancellableFetchCitation?.cancel();
+    this.cancellableFetchCitation?.cancel()
   }
 
   placeholderLoader = () => {
@@ -44,67 +44,67 @@ export class RecordCitationField extends Component {
           <Placeholder.Line />
         </Placeholder.Paragraph>
       </Placeholder>
-    );
-  };
+    )
+  }
 
   errorMessage = (message) => {
     return (
       <div className="citation-error-message">
         <p>{message}</p>
       </div>
-    );
-  };
+    )
+  }
 
   fetchCitation = async (record, style) => {
     return await axios(
       `${record.links.self}?locale=${navigator.language}&style=${style}`,
       {
         headers: {
-          Accept: "text/x-bibliography",
+          Accept: 'text/x-bibliography',
         },
-      }
-    );
-  };
+      },
+    )
+  }
 
   getCitation = async (record, style) => {
     this.setState({
       loading: true,
-      citation: "",
-      error: "",
-    });
+      citation: '',
+      error: '',
+    })
 
     this.cancellableFetchCitation = withCancel(
-      this.fetchCitation(record, style)
-    );
+      this.fetchCitation(record, style),
+    )
 
     try {
-      const response = await this.cancellableFetchCitation.promise;
+      const response = await this.cancellableFetchCitation.promise
       this.setState({
         loading: false,
         citation: response.data,
-      });
+      })
     } catch (error) {
-      if (error !== "UNMOUNTED") {
+      if (error !== 'UNMOUNTED') {
         this.setState({
           loading: false,
-          citation: "",
-          error: i18next.t("An error occurred while generating the citation."),
-        });
+          citation: '',
+          error: i18next.t('An error occurred while generating the citation.'),
+        })
       }
     }
-  };
+  }
 
   render() {
-    const { styles, record, defaultStyle } = this.props;
-    const { loading, citation, error } = this.state;
+    const { styles, record, defaultStyle } = this.props
+    const { loading, citation, error } = this.state
 
     const citationOptions = styles.map((style) => {
       return {
         key: style[0],
         value: style[0],
         text: style[1],
-      };
-    });
+      }
+    })
 
     return (
       <Grid className="record-citation">
@@ -115,7 +115,7 @@ export class RecordCitationField extends Component {
             computer={12}
             className="no-padding"
           >
-            <h2 id="citation-heading">{i18next.t("Citation")}</h2>
+            <h2 id="citation-heading">{i18next.t('Citation')}</h2>
           </Grid.Column>
 
           <Grid.Column
@@ -126,7 +126,7 @@ export class RecordCitationField extends Component {
             textAlign="right"
           >
             <div className="citation-style-selector">
-              <label id="citation-style-label">{i18next.t("Style")}</label>
+              <label id="citation-style-label">{i18next.t('Style')}</label>
               <Dropdown
                 className="citation-dropdown"
                 aria-labelledby="citation-style-label"
@@ -135,7 +135,7 @@ export class RecordCitationField extends Component {
                 selection
                 onChange={_debounce(
                   (event, data) => this.getCitation(record, data.value),
-                  500
+                  500,
                 )}
               />
             </div>
@@ -156,7 +156,7 @@ export class RecordCitationField extends Component {
 
         {error ? this.errorMessage(error) : null}
       </Grid>
-    );
+    )
   }
 }
 
@@ -164,4 +164,4 @@ RecordCitationField.propTypes = {
   styles: PropTypes.array.isRequired,
   record: PropTypes.object.isRequired,
   defaultStyle: PropTypes.string.isRequired,
-};
+}

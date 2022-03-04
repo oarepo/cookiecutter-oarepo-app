@@ -10,12 +10,12 @@
 import {
   SearchAppFacets,
   SearchAppResultsPane,
-} from "@js/invenio_search_ui/components";
-import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
-import _get from "lodash/get";
-import _truncate from "lodash/truncate";
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+} from '@js/invenio_search_ui/components'
+import { i18next } from '@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next'
+import _get from 'lodash/get'
+import _truncate from 'lodash/truncate'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   BucketAggregation,
   Count,
@@ -25,7 +25,7 @@ import {
   SearchBar,
   Sort,
   withState,
-} from "react-searchkit";
+} from 'react-searchkit'
 import {
   Button,
   Card,
@@ -37,21 +37,21 @@ import {
   Item,
   Label,
   Segment,
-} from "semantic-ui-react";
+} from 'semantic-ui-react'
 import {
   RDMBucketAggregationElement,
   RDMRecordFacetsValues,
   RDMRecordSearchBarElement,
   SearchHelpLinks,
-} from "../../search/components";
-import { timestampToRelativeTime } from "../../utils";
+} from '../../search/components'
+import { timestampToRelativeTime } from '../../utils'
 
 export const RequestsResults = ({
   sortOptions,
   paginationOptions,
   currentResultsState,
 }) => {
-  const { total } = currentResultsState.data;
+  const { total } = currentResultsState.data
   return (
     total && (
       <Grid>
@@ -67,7 +67,7 @@ export const RequestsResults = ({
                     <Count
                       label={() => (
                         <>
-                          {total} {i18next.t("result(s) found")}
+                          {total} {i18next.t('result(s) found')}
                         </>
                       )}
                     />
@@ -82,7 +82,7 @@ export const RequestsResults = ({
                         values={sortOptions}
                         label={(cmp) => (
                           <>
-                            {i18next.t("Sort by")} {cmp}
+                            {i18next.t('Sort by')} {cmp}
                           </>
                         )}
                       />
@@ -103,7 +103,7 @@ export const RequestsResults = ({
           <Grid.Column width={8} textAlign="center">
             <Pagination
               options={{
-                size: "mini",
+                size: 'mini',
                 showFirst: false,
                 showLast: false,
               }}
@@ -114,8 +114,8 @@ export const RequestsResults = ({
               values={paginationOptions.resultsPerPage}
               label={(cmp) => (
                 <>
-                  {" "}
-                  {cmp} {i18next.t("results per page")}
+                  {' '}
+                  {cmp} {i18next.t('results per page')}
                 </>
               )}
             />
@@ -123,12 +123,12 @@ export const RequestsResults = ({
         </Grid.Row>
       </Grid>
     )
-  );
-};
+  )
+}
 
 export function RequestsResultsGridItemTemplate({ result, index }) {
   return (
-    <Card fluid key={index} href={`/requests/${result.metadata.id}`}>
+    <Card fluid key={index} href={`/me/requests/${result.metadata.id}`}>
       <Card.Content>
         <Card.Header>{result.metadata.title}</Card.Header>
         <Card.Description>
@@ -138,12 +138,12 @@ export function RequestsResultsGridItemTemplate({ result, index }) {
         </Card.Description>
       </Card.Content>
     </Card>
-  );
+  )
 }
 
 export function RequestsResultsItemTemplate({ result, index }) {
-  const createdDate = new Date(result.created);
-  const differenceInDays = timestampToRelativeTime(createdDate.toISOString());
+  const createdDate = new Date(result.created)
+  const differenceInDays = timestampToRelativeTime(createdDate.toISOString())
   return (
     <Item key={index}>
       <Item.Content>
@@ -153,7 +153,7 @@ export function RequestsResultsItemTemplate({ result, index }) {
               <Label size="large">{result.type}</Label>
             </span>
           )}
-          <a href={`/requests/${result.id}`}>{result.title}</a>
+          <a href={`/me/requests/${result.id}`}>{result.title}</a>
         </Item.Header>
 
         <Item.Meta className="mt-10">
@@ -178,7 +178,7 @@ export function RequestsResultsItemTemplate({ result, index }) {
         </Item.Meta>
       </Item.Content>
     </Item>
-  );
+  )
 }
 // FIXME: Keeping ResultsGrid.item and SearchBar.element because otherwise
 // these components in RDM result broken.
@@ -186,11 +186,11 @@ export function RequestsResultsItemTemplate({ result, index }) {
 export const RDMRecordResultsGridItem = ({ result, index }) => {
   const description_stripped = _get(
     result,
-    "ui.description_stripped",
-    "No description"
-  );
+    'ui.description_stripped',
+    'No description',
+  )
   return (
-    <Card fluid key={index} href={`/requests/${result.id}`}>
+    <Card fluid key={index} href={`/me/requests/${result.id}`}>
       <Card.Content>
         <Card.Header>{result.metadata.title}</Card.Header>
         <Card.Description>
@@ -198,70 +198,28 @@ export const RDMRecordResultsGridItem = ({ result, index }) => {
         </Card.Description>
       </Card.Content>
     </Card>
-  );
-};
-
-export const RDMEmptyResults = (props) => {
-  const queryString = props.queryString;
-  return queryString === "" ? (
-    <Segment.Group>
-      <Segment placeholder textAlign="center" padded="very">
-        <Header as="h1" align="center">
-          <Header.Content>
-            {i18next.t("Get started!")}
-            <Header.Subheader>
-              {i18next.t("Create your first request!")}
-            </Header.Subheader>
-          </Header.Content>
-        </Header>
-        <Divider hidden />
-        <Button
-          color="green"
-          icon="upload"
-          floated="right"
-          href="/requests/new"
-          content={i18next.t("New request")}
-        />
-      </Segment>
-    </Segment.Group>
-  ) : (
-    <Segment placeholder textAlign="center">
-      <Header icon>
-        <Icon name="search" />
-        {i18next.t("No results found!")}
-      </Header>
-      {queryString && (
-        <em>
-          {i18next.t("Current search")} "{queryString}"
-        </em>
-      )}
-      <br />
-      <Button primary onClick={() => props.resetQuery()}>
-        {i18next.t("Clear query")}
-      </Button>
-    </Segment>
-  );
-};
+  )
+}
 
 export class RequestStatusFilterComponent extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       open: undefined,
-    };
+    }
   }
 
   componentDidMount() {
-    const { currentQueryState } = this.props;
-    const userSelectionFilters = currentQueryState.filters;
+    const { currentQueryState } = this.props
+    const userSelectionFilters = currentQueryState.filters
     const openFilter = userSelectionFilters.find((obj) =>
-      obj.includes("is_open")
-    );
+      obj.includes('is_open'),
+    )
     if (openFilter) {
       this.setState({
-        open: openFilter.includes("true"),
-      });
+        open: openFilter.includes('true'),
+      })
     }
   }
 
@@ -270,30 +228,30 @@ export class RequestStatusFilterComponent extends Component {
    * @param {string} OpenStatus true if open requests and false if closed requests
    */
   retrieveRequests = (OpenStatus) => {
-    const { currentQueryState, updateQueryState } = this.props;
-    const { open } = this.state;
+    const { currentQueryState, updateQueryState } = this.props
+    const { open } = this.state
 
     if (open === OpenStatus) {
-      return;
+      return
     }
     this.setState({
       open: OpenStatus,
-    });
-    currentQueryState.filters = [];
-    currentQueryState.filters.push(["is_open", OpenStatus]);
-    updateQueryState(currentQueryState);
-  };
+    })
+    currentQueryState.filters = []
+    currentQueryState.filters.push(['is_open', OpenStatus])
+    updateQueryState(currentQueryState)
+  }
 
   retrieveOpenRequests = () => {
-    this.retrieveRequests(true);
-  };
+    this.retrieveRequests(true)
+  }
 
   retrieveClosedRequests = () => {
-    this.retrieveRequests(false);
-  };
+    this.retrieveRequests(false)
+  }
 
   render() {
-    const { open } = this.state;
+    const { open } = this.state
     return (
       <Button.Group basic>
         <Button
@@ -301,26 +259,26 @@ export class RequestStatusFilterComponent extends Component {
           onClick={this.retrieveOpenRequests}
           active={open === true}
         >
-          {i18next.t("Open")}
+          {i18next.t('Open')}
         </Button>
         <Button
           className="request-search-filter"
           onClick={this.retrieveClosedRequests}
           active={open === false}
         >
-          {i18next.t("Closed")}
+          {i18next.t('Closed')}
         </Button>
       </Button.Group>
-    );
+    )
   }
 }
 
 RequestStatusFilterComponent.propTypes = {
   updateQueryState: PropTypes.func.isRequired,
   currentQueryState: PropTypes.object.isRequired,
-};
+}
 
-export const RequestStatusFilter = withState(RequestStatusFilterComponent);
+export const RequestStatusFilter = withState(RequestStatusFilterComponent)
 
 export const RDMRequestsSearchLayout = (props) => {
   return (
@@ -332,7 +290,7 @@ export const RDMRequestsSearchLayout = (props) => {
             <RequestStatusFilter />
           </Grid.Column>
           <Grid.Column width={9}>
-            <SearchBar placeholder={i18next.t("Search requests...")} />
+            <SearchBar placeholder={i18next.t('Search requests...')} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -345,89 +303,93 @@ export const RDMRequestsSearchLayout = (props) => {
         </Grid.Row>
       </Grid>
     </Container>
-  );
-};
+  )
+}
 
 export const RequestsFacets = ({ aggs, currentResultsState }) => {
   return (
-    <aside aria-label={i18next.t("filters")} id="search-filters">
+    <aside aria-label={i18next.t('filters')} id="search-filters">
       {aggs.map((agg) => {
         return (
           <div className="ui accordion" key={agg.title}>
             <BucketAggregation title={agg.title} agg={agg} />
           </div>
-        );
+        )
       })}
       <SearchHelpLinks />
     </aside>
-  );
-};
+  )
+}
 
 export const RDMRequestsEmptyResults = (props) => {
-  const { queryString, userSelectionFilters } = props;
+  const { queryString, userSelectionFilters } = props
   const is_open = userSelectionFilters.some(
-    (obj) => obj.includes("is_open") && obj.includes("true")
-  );
+    (obj) => obj.includes('is_open') && obj.includes('true'),
+  )
   const filtersToNotReset = userSelectionFilters.find((obj) =>
-    obj.includes("is_open")
-  );
+    obj.includes('is_open'),
+  )
   const elementsToReset = {
-    queryString: "",
+    queryString: '',
     page: 1,
     filters: [filtersToNotReset],
-  };
+  }
 
   const AllDone = () => {
     return (
       <>
-        <Header as="h2" icon>
-          {i18next.t("All done!")}
+        <Header as="h1" icon>
+          {i18next.t('All done!')}
           <Header.Subheader>
             {i18next.t("You've caught up with all open requests.")}
           </Header.Subheader>
         </Header>
       </>
-    );
-  };
+    )
+  }
 
   const NoResults = () => {
     return (
       <>
-        <Header as="h6" icon>
-          <Icon name="search">
-            <span className="ml-10">{i18next.t("No requests found")}</span>
-          </Icon>
+        <Header icon>
+          <Icon name="search" />
+          {i18next.t('No requests found!')}
         </Header>
-        <Button primary onClick={() => props.updateQueryState(elementsToReset)}>
-          {i18next.t("Clear query")}
-        </Button>
+        {queryString && (
+          <Button
+            primary
+            onClick={() => props.updateQueryState(elementsToReset)}
+          >
+            {i18next.t('Reset search')}
+          </Button>
+        )}
       </>
-    );
-  };
+    )
+  }
 
-  const allRequestsDone = is_open && !queryString;
+  const allRequestsDone = is_open && !queryString
   return (
     <>
       <Segment placeholder textAlign="center">
         {allRequestsDone ? <AllDone /> : <NoResults />}
       </Segment>
     </>
-  );
-};
+  )
+}
 
 export const RDMRequestsEmptyResultsWithState = withState(
-  RDMRequestsEmptyResults
-);
+  RDMRequestsEmptyResults,
+)
 
 export const defaultComponents = {
-  "user-requests-search.BucketAggregation.element": RDMBucketAggregationElement,
-  "user-requests-search.BucketAggregationValues.element": RDMRecordFacetsValues,
-  "user-requests-search.SearchApp.facets": RequestsFacets,
-  "user-requests-search.ResultsList.item": RequestsResultsItemTemplate,
-  "user-requests-search.ResultsGrid.item": RequestsResultsGridItemTemplate,
-  "user-requests-search.SearchApp.layout": RDMRequestsSearchLayout,
-  "user-requests-search.SearchApp.results": RequestsResults,
-  "user-requests-search.SearchBar.element": RDMRecordSearchBarElement,
-  "user-requests-search.EmptyResults.element": RDMRequestsEmptyResultsWithState,
-};
+  'user-requests-search.BucketAggregation.element': RDMBucketAggregationElement,
+  'user-requests-search.BucketAggregationValues.element': RDMRecordFacetsValues,
+  'user-requests-search.SearchApp.facets': RequestsFacets,
+  'user-requests-search.ResultsList.item': RequestsResultsItemTemplate,
+  'user-requests-search.ResultsGrid.item': RequestsResultsGridItemTemplate,
+  'user-requests-search.SearchApp.layout': RDMRequestsSearchLayout,
+  'user-requests-search.SearchApp.results': RequestsResults,
+  'user-requests-search.SearchBar.element': RDMRecordSearchBarElement,
+  'user-requests-search.EmptyResults.element': RDMRequestsEmptyResultsWithState,
+}
 {%- endraw %}

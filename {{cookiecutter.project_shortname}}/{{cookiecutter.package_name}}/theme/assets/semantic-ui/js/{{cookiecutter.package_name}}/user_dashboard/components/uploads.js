@@ -7,10 +7,10 @@
 // Invenio App RDM is free software; you can redistribute it and/or modify it
 // under the terms of the MIT License; see LICENSE file for more details.
 {%- raw %}
-import { i18next } from "@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next";
-import _get from "lodash/get";
-import _truncate from "lodash/truncate";
-import React, { useState } from "react";
+import { i18next } from '@translations/{%- endraw %}{{cookiecutter.package_name}}{%- raw %}/i18next'
+import _get from 'lodash/get'
+import _truncate from 'lodash/truncate'
+import React, { useState } from 'react'
 import {
   Button,
   Card,
@@ -23,8 +23,8 @@ import {
   Label,
   Modal,
   Segment,
-} from "semantic-ui-react";
-import { axiosWithconfig, SearchItemCreators } from "../../utils";
+} from 'semantic-ui-react'
+import { axiosWithconfig, SearchItemCreators } from '../../utils'
 import {
   RDMBucketAggregationElement,
   RDMCountComponent,
@@ -32,27 +32,28 @@ import {
   RDMRecordFacetsValues,
   RDMRecordSearchBarElement,
   RDMToggleComponent,
-} from "../../search/components";
-import { DashboardResultView, DashboardSearchLayoutHOC } from "./base";
+  RDMEmptyResults as RDMNoSearchResults,
+} from '../../search/components'
+import { DashboardResultView, DashboardSearchLayoutHOC } from './base'
 
 const DeleteDraftButton = (props) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
 
-  const handleOpen = () => setModalOpen(true);
+  const handleOpen = () => setModalOpen(true)
 
-  const handleClose = () => setModalOpen(false);
+  const handleClose = () => setModalOpen(false)
 
   const handleDelete = async () => {
     const resp = await axiosWithconfig.delete(
       `/api/records/${props.record.id}/draft`,
       {},
       {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    handleClose();
-    window.location.reload();
-  };
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
+    handleClose()
+    window.location.reload()
+  }
 
   return (
     <>
@@ -64,73 +65,73 @@ const DeleteDraftButton = (props) => {
         onClick={handleOpen}
       >
         <Icon name="trash alternate outline" />
-        {i18next.t("Delete")}
+        {i18next.t('Delete')}
       </Button>
 
       <Modal open={modalOpen} onClose={handleClose} size="tiny">
         <Modal.Content>
-          <h3>{i18next.t("Are you sure you want to delete this draft?")}</h3>
+          <h3>{i18next.t('Are you sure you want to delete this draft?')}</h3>
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={handleClose} floated="left">
-            {i18next.t("Cancel")}
+            {i18next.t('Cancel')}
           </Button>
           <Button color="red" onClick={handleDelete}>
-            {i18next.t("Delete")}
+            {i18next.t('Delete')}
           </Button>
         </Modal.Actions>
       </Modal>
     </>
-  );
-};
+  )
+}
 
 export const RDMRecordResultsListItem = ({ result, index }) => {
-  const access_status_id = _get(result, "ui.access_status.id", "open");
-  const access_status = _get(result, "ui.access_status.title_l10n", "Open");
-  const access_status_icon = _get(result, "ui.access_status.icon", "unlock");
+  const access_status_id = _get(result, 'ui.access_status.id', 'open')
+  const access_status = _get(result, 'ui.access_status.title_l10n', 'Open')
+  const access_status_icon = _get(result, 'ui.access_status.icon', 'unlock')
   const createdDate = _get(
     result,
-    "ui.created_date_l10n_long",
-    i18next.t("No creation date found.")
-  );
-  const creators = _get(result, "ui.creators.creators", []).slice(0, 3);
+    'ui.created_date_l10n_long',
+    i18next.t('No creation date found.'),
+  )
+  const creators = _get(result, 'ui.creators.creators', []).slice(0, 3)
 
   const description_stripped = _get(
     result,
-    "ui.description_stripped",
-    i18next.t("No description")
-  );
+    'ui.description_stripped',
+    i18next.t('No description'),
+  )
 
   const publicationDate = _get(
     result,
-    "ui.publication_date_l10n_long",
-    i18next.t("No publication date found.")
-  );
+    'ui.publication_date_l10n_long',
+    i18next.t('No publication date found.'),
+  )
   const resource_type = _get(
     result,
-    "ui.resource_type.title_l10n",
-    i18next.t("No resource type")
-  );
-  const title = _get(result, "metadata.title", i18next.t("No title"));
-  const subjects = _get(result, "ui.subjects", []);
-  const version = _get(result, "ui.version", null);
-  const is_published = result.is_published;
+    'ui.resource_type.title_l10n',
+    i18next.t('No resource type'),
+  )
+  const title = _get(result, 'metadata.title', i18next.t('No title'))
+  const subjects = _get(result, 'ui.subjects', [])
+  const version = _get(result, 'ui.version', null)
+  const is_published = result.is_published
 
   // Derivatives
   const editRecord = () => {
     axiosWithconfig
       .post(`/api/records/${result.id}/draft`)
       .then((response) => {
-        window.location = `/uploads/${result.id}`;
+        window.location = `/uploads/${result.id}`
       })
       .catch((error) => {
-        console.log(error.response.data);
-      });
-  };
+        console.log(error.response.data)
+      })
+  }
 
   const viewLink = is_published
     ? `/records/${result.id}`
-    : `/uploads/${result.id}`;
+    : `/uploads/${result.id}`
   return (
     <Item key={index} className="deposits-list-item">
       <div className="status-icon">
@@ -144,7 +145,7 @@ export const RDMRecordResultsListItem = ({ result, index }) => {
           </Item.Extra>
         </Item.Content>
       </div>
-      <Item.Content style={{ cursor: "default" }}>
+      <Item.Content style={{ cursor: 'default' }}>
         <Item.Extra className="labels-actions">
           {/* For reduced spacing between labels. */}
           <Label size="tiny" color="blue">
@@ -166,12 +167,12 @@ export const RDMRecordResultsListItem = ({ result, index }) => {
             onClick={() => editRecord()}
           >
             <Icon name="edit" />
-            {i18next.t("Edit")}
+            {i18next.t('Edit')}
           </Button>
           {is_published ? (
             <Button compact size="small" floated="right" href={viewLink}>
               <Icon name="eye" />
-              {i18next.t("View")}
+              {i18next.t('View')}
             </Button>
           ) : (
             <DeleteDraftButton record={result} />
@@ -197,15 +198,15 @@ export const RDMRecordResultsListItem = ({ result, index }) => {
           {createdDate && (
             <div>
               <small>
-                {i18next.t("Uploaded on")} <span>{createdDate}</span>
+                {i18next.t('Uploaded on')} <span>{createdDate}</span>
               </small>
             </div>
           )}
         </Item.Extra>
       </Item.Content>
     </Item>
-  );
-};
+  )
+}
 
 // FIXME: Keeping ResultsGrid.item and SearchBar.element because otherwise
 // these components in RDM result broken.
@@ -213,9 +214,9 @@ export const RDMRecordResultsListItem = ({ result, index }) => {
 export const RDMRecordResultsGridItem = ({ result, index }) => {
   const description_stripped = _get(
     result,
-    "ui.description_stripped",
-    "No description"
-  );
+    'ui.description_stripped',
+    'No description',
+  )
   return (
     <Card fluid key={index} href={`/records/${result.id}`}>
       <Card.Content>
@@ -225,19 +226,19 @@ export const RDMRecordResultsGridItem = ({ result, index }) => {
         </Card.Description>
       </Card.Content>
     </Card>
-  );
-};
+  )
+}
 
 export const RDMEmptyResults = (props) => {
-  const queryString = props.queryString;
-  return queryString === "" ? (
+  const queryString = props.queryString
+  return queryString === '' ? (
     <Segment.Group>
       <Segment placeholder textAlign="center" padded="very">
         <Header as="h1" align="center">
           <Header.Content>
-            {i18next.t("Get started!")}
+            {i18next.t('Get started!')}
             <Header.Subheader>
-              {i18next.t("Make your first upload!")}
+              {i18next.t('Make your first upload!')}
             </Header.Subheader>
           </Header.Content>
         </Header>
@@ -247,53 +248,41 @@ export const RDMEmptyResults = (props) => {
           icon="upload"
           floated="right"
           href="/uploads/new"
-          content={i18next.t("New upload")}
+          content={i18next.t('New upload')}
         />
       </Segment>
     </Segment.Group>
   ) : (
-    <Segment placeholder textAlign="center">
-      <Header icon>
-        <Icon name="search" />
-        {i18next.t("No results found!")}
-      </Header>
-      {queryString && (
-        <em>
-          {i18next.t("Current search")} "{queryString}"
-        </em>
-      )}
-      <br />
-      <Button primary onClick={() => props.resetQuery()}>
-        {i18next.t("Clear query")}
-      </Button>
+    <Segment padded="very">
+      <RDMNoSearchResults {...props} searchPath="/me/uploads" />
     </Segment>
-  );
-};
+  )
+}
 
 export const DashboardUploadsSearchLayout = DashboardSearchLayoutHOC({
-  searchBarPlaceholder: i18next.t("Search uploads..."),
+  searchBarPlaceholder: i18next.t('Search uploads...'),
   newBtn: (
     <Button
       positive
       icon="upload"
       href="/uploads/new"
-      content={i18next.t("New upload")}
+      content={i18next.t('New upload')}
       floated="right"
     />
   ),
-});
+})
 
 export const defaultComponents = {
-  "user-uploads-search.BucketAggregation.element": RDMBucketAggregationElement,
-  "user-uploads-search.BucketAggregationValues.element": RDMRecordFacetsValues,
-  "user-uploads-search.Count.element": RDMCountComponent,
-  "user-uploads-search.EmptyResults.element": RDMEmptyResults,
-  "user-uploads-search.ResultsList.item": RDMRecordResultsListItem,
-  "user-uploads-search.ResultsGrid.item": RDMRecordResultsGridItem,
-  "user-uploads-search.SearchApp.facets": RDMRecordFacets,
-  "user-uploads-search.SearchApp.layout": DashboardUploadsSearchLayout,
-  "user-uploads-search.SearchApp.results": DashboardResultView,
-  "user-uploads-search.SearchBar.element": RDMRecordSearchBarElement,
-  "user-uploads-search.SearchFilters.ToggleComponent": RDMToggleComponent,
-};
+  'user-uploads-search.BucketAggregation.element': RDMBucketAggregationElement,
+  'user-uploads-search.BucketAggregationValues.element': RDMRecordFacetsValues,
+  'user-uploads-search.Count.element': RDMCountComponent,
+  'user-uploads-search.EmptyResults.element': RDMEmptyResults,
+  'user-uploads-search.ResultsList.item': RDMRecordResultsListItem,
+  'user-uploads-search.ResultsGrid.item': RDMRecordResultsGridItem,
+  'user-uploads-search.SearchApp.facets': RDMRecordFacets,
+  'user-uploads-search.SearchApp.layout': DashboardUploadsSearchLayout,
+  'user-uploads-search.SearchApp.results': DashboardResultView,
+  'user-uploads-search.SearchBar.element': RDMRecordSearchBarElement,
+  'user-uploads-search.SearchFilters.ToggleComponent': RDMToggleComponent,
+}
 {%- endraw %}

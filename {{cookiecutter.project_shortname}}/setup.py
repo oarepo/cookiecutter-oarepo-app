@@ -93,6 +93,8 @@ setup(
         'invenio_base.blueprints': [
             '{{cookiecutter.package_name}}_records = ' \
                 '{{cookiecutter.package_name}}.records_ui.views:create_blueprint',
+            '{{cookiecutter.package_name}}_requests = ' \
+                '{{cookiecutter.package_name}}.requests_ui.views:create_ui_blueprint',
             '{{cookiecutter.package_name}} = {{cookiecutter.package_name}}.theme.views:create_blueprint',
         ],
         'invenio_assets.webpack': [

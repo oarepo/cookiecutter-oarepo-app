@@ -537,6 +537,17 @@ If the value is callable, its return value will be used for the field
 (e.g. lambda/function for dynamic calculation of values).
 """
 
+APP_DEPOSIT_FORM_AUTOCOMPLETE_NAMES = 'search'
+"""Behavior for autocomplete names search field for creators/contributors.
+
+Available options:
+
+- ``search`` (default): Show search field and form always.
+- ``search_only``: Only show search field. Form displayed after selection or
+explicit "manual" entry.
+- ``off``: Only show person form (no search field).
+"""
+
 CITATION_STYLES = [
     ('apa', _('APA')),
     ('harvard-cite-them-right', _('Harvard')),
@@ -551,14 +562,14 @@ CITATION_STYLES_DEFAULT = 'apa'
 """Default citation style"""
 
 APP_DETAIL_SIDE_BAR_TEMPLATES = [
-    "{{cookiecutter.package_name}}/records/details/side_bar/metrics.html",
-    "{{cookiecutter.package_name}}/records/details/side_bar/versions.html",
-    "{{cookiecutter.package_name}}/records/details/side_bar/keywords_subjects.html",
-    "{{cookiecutter.package_name}}/records/details/side_bar/details.html",
-    "{{cookiecutter.package_name}}/records/details/side_bar/licenses.html",
-    "{{cookiecutter.package_name}}/records/details/side_bar/export.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/metrics.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/versions.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/keywords_subjects.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/details.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/licenses.html",
+    # "{{cookiecutter.package_name}}/records/details/side_bar/export.html",
 ]
-"""Template names for detail view sidebar components"""
+"""Template names for record detail view sidebar components"""
 
 SEARCH_USER_COMMUNITIES = {
     'facets': ['visibility', 'type'],
@@ -571,3 +582,7 @@ SEARCH_USER_REQUESTS = {
     'sort': ['bestmatch', 'newest', 'oldest'],
 }
 """User requests search configuration (i.e list of user requests)"""
+
+REQUESTS_ROUTES = {
+     'user-dashboard-community-submission': '/me/requests/<pid_value>',
+ }

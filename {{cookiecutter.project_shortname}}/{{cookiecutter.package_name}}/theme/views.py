@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (C) 2019-2020 CERN.
+# Copyright (C) 2019-2020 Northwestern University.
+# Copyright (C)      2021 TU Wien.
 # Copyright (c) 2022 {{cookiecutter.author_name}}
 #
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
-
+# Invenio App RDM is free software; you can redistribute it and/or modify it
+# under the terms of the MIT License; see LICENSE file for more details.
 
 """Routes for general pages provided by {{cookiecutter.project_shortname}}."""
 
@@ -44,8 +48,16 @@ def create_blueprint(app):
             order=1,
         )
 
-    return blueprint
+        if app.config.get("COMMUNITIES_ENABLED", False):
+            current_menu.submenu("notifications.requests").register(
+                "{{cookiecutter.package_name}}_records.dashboard",
+                endpoint_arguments_constructor=lambda: {
+                    "dashboard_name": "requests",
+                },
+                order=1,
+            )
 
+    return blueprint
 
 #
 # Views
@@ -62,6 +74,6 @@ def help_search():
     # Default to rendering english page if locale page not found.
     locale = get_locale()
     return render_template([
-        f"{{cookiecutter.project_shortname}}/help/search.{locale}.html",
-        "{{cookiecutter.project_shortname}}/help/search.en.html",
+        f"{{cookiecutter.package_name}}/help/search.{locale}.html",
+        "{{cookiecutter.package_name}}/help/search.en.html",
     ])
