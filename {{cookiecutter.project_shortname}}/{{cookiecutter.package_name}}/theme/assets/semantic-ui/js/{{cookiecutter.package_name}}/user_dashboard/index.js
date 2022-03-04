@@ -19,6 +19,7 @@ import { defaultComponents as CommunitiesDefaultComponents } from './components/
 import { defaultComponents as UploadsDefaultComponents } from './components/uploads'
 import { defaultComponents as RequestsDefaultComponents } from './components/requests'
 
+{%- raw %}
 const rootElement = document.getElementById('invenio-user-dashboard')
 const getConfigFromDataAttribute = (element, attr) => {
   const dataValue = rootElement.dataset[attr]
@@ -151,3 +152,4 @@ function renderMenuCustom() {
     </Container>
   )
 }
+{%- endraw %}
