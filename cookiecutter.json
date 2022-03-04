@@ -14,8 +14,5 @@
   "elasticsearch": ["7"],
   "file_storage": ["local", "S3"],
   "development_tools": ["yes", "no"],
-  "record_model": "my-oarepo-records",
-  "_copy_without_render": [
-       "**/*.html"
-   ]
+  "data_model": ""
 }

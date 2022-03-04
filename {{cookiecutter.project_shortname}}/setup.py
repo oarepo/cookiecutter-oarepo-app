@@ -12,7 +12,7 @@ from setuptools import find_packages, setup
 
 readme = open('README.md').read()
 
-invenio_version = '~=3.5.0a3'
+invenio_version = '~=3.5.0a4'
 invenio_search_version = '>=1.4.2,<1.5.0'
 invenio_db_version = '>=1.0.11,<1.1.0'
 
@@ -61,7 +61,9 @@ install_requires = [
     'CairoSVG>=2.5.2,<3.0.0',
     f'invenio[base,auth,metadata,files]{invenio_version}',
     'invenio-logging[sentry-sdk]>=1.3.0,<1.4.0',
-    '{{cookiecutter.record_model}}>=1.0.0.dev1'
+    {%- if cookiecutter.data_model %}
+    '{{cookiecutter.data_model}}>=1.0.0.dev1'
+    {%- endif %}
 ]
 
 packages = find_packages()
