@@ -60,6 +60,7 @@ for name, reqs in extras_require.items():
 install_requires = [
     'CairoSVG>=2.5.2,<3.0.0',
     f'invenio[base,auth,metadata,files]{invenio_version}',
+    'invenio-records-resources>=0.19.0,<0.20.0',
     'invenio-logging[sentry-sdk]>=1.3.0,<1.4.0',
     {%- if cookiecutter.data_model %}
     '{{cookiecutter.data_model}}>=1.0.0.dev1'
