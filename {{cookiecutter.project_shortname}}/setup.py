@@ -92,6 +92,9 @@ setup(
     include_package_data=True,
     platforms='any',
     entry_points={
+        'flask.commands': [
+            'rdm-records = {{cookiecutter.package_name}}.cli:rdm_records',
+        ],
         'invenio_base.blueprints': [
             '{{cookiecutter.package_name}}_records = ' \
                 '{{cookiecutter.package_name}}.records_ui.views:create_blueprint',
