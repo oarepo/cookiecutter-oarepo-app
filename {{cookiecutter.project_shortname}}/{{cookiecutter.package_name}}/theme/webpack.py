@@ -55,7 +55,7 @@ theme = WebpackThemeBundle(
                 '../../theme.config$': 'less/theme.config',
                 'themes/oarepo': 'less/{{cookiecutter.package_name}}/theme',
                 '@less/{{cookiecutter.package_name}}': 'less/{{cookiecutter.package_name}}',
-                '@translations/{{cookiecutter.package_name}}': 'translations/{{cookiecutter.package_name}}'
+                '@translations/{{cookiecutter.package_name}}': 'translations/{{cookiecutter.package_name}}',
                 '@translations/invenio_app_rdm': 'translations/{{cookiecutter.package_name}}'
             }
         ),
