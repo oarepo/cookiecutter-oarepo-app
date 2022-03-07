@@ -576,5 +576,6 @@ SEARCH_USER_REQUESTS = {
 """User requests search configuration (i.e list of user requests)"""
 
 REQUESTS_ROUTES = {
-     'user-dashboard-community-submission': '/me/requests/<pid_value>',
+    'details': '/me/requests/<pid_value>',
+    'user-dashboard-community-submission': '/me/requests/<pid_value>',
  }
