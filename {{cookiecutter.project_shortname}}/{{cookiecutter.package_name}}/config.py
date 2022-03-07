@@ -174,11 +174,11 @@ FILES_REST_PERMISSION_FACTORY = files_rest_permission_factory
 # =================
 # See https://invenio-iiif.readthedocs.io/en/latest/configuration.html
 
-IIIF_PREVIEW_TEMPLATE = "{{cookiecutter.package_name}}/records/iiif_preview.html"
-"""Template for IIIF image preview."""
+# IIIF_PREVIEW_TEMPLATE = "{{cookiecutter.package_name}}/records/iiif_preview.html"
+# """Template for IIIF image preview."""
 
-IIIF_API_DECORATOR_HANDLER = None
-IIIF_IMAGE_OPENER_HANDLER = "{{cookiecutter.package_name}}.resources.iiif:image_opener"
+# IIIF_API_DECORATOR_HANDLER = None
+# IIIF_IMAGE_OPENER_HANDLER = "{{cookiecutter.package_name}}.resources.iiif:image_opener"
 
 # Invenio-Previewer
 # =================
