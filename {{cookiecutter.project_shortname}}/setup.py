@@ -58,6 +58,7 @@ for name, reqs in extras_require.items():
     extras_require['all'].extend(reqs)
 
 install_requires = [
+    'pyyaml>=5.4.0',
     'CairoSVG>=2.5.2,<3.0.0',
     f'invenio[base,auth,metadata,files]{invenio_version}',
     'invenio-records-resources>=0.19.0,<0.20.0',
