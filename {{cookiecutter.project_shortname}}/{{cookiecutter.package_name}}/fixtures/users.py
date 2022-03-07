@@ -11,7 +11,6 @@
 import secrets
 import string
 
-import yaml
 from flask import current_app
 from flask_security.utils import hash_password
 from invenio_access.models import ActionUsers
